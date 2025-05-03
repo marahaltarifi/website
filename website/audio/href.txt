@@ -1,0 +1,18 @@
+index     "C:\website\page\index.html"
+alphabet English     "C:\website\page\english-alphabet.html"
+vocabulary English     "C:\website\page\english-vocabulary.html"
+grammar English     "C:\website\page\english-grammar.html"
+audio English    "C:\website\page\english-audio.html"
+
+
+alphabet Spanish     "C:\website\page\spanish-alphabet.html"
+vocabulary Spanish    "C:\website\page\spanish-vocabulary.html"
+grammar Spanish     "C:\website\page\spanish-grammar.html"
+audio Spanish     "C:\website\page\spanish-audio.html"
+
+
+
+alphabet French       "C:\website\page\french-alphabet.html"
+vocabulary French      "C:\website\page\french-vocabulary.html"
+grammar French      
+audio French       

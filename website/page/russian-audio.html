@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>الحروف الروسية - الاستماع</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #e6f9fa;
+    }
+    header {
+      background-color: #007BFF;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav {
+      background-color: #007BFF;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .container {
+      padding: 30px;
+      text-align: center;
+    }
+    h2 {
+      color: #007BFF;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background-color: white;
+      border: 2px solid #007BFF;
+      padding: 20px;
+      border-radius: 10px;
+      color: #007BFF;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .card:hover {
+      background-color: #cce5ff;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>الحروف الروسية - استمع وتعلّم</div>
+  <!-- شريط التبويبات داخل الهيدر -->
+  <nav>
+    <a href="#alphabet">الأحرف الروسية</a>
+    <a href="#vocabulary">المفردات</a>
+    <a href="#grammar">القواعد</a>
+  </nav>
+</header>
+
+<div class="container" id="alphabet">
+  <h2>انقر على الحرف للاستماع إلى نطقه</h2>
+ 
+  <div class="grid">
+    <div class="card" onclick="playSound('a')">А</div>
+    <div class="card" onclick="playSound('b')">Б</div>
+    <div class="card" onclick="playSound('v')">В</div>
+    <div class="card" onclick="playSound('g')">Г</div>
+    <div class="card" onclick="playSound('d')">Д</div>
+    <div class="card" onclick="playSound('e')">Е</div>
+    <div class="card" onclick="playSound('yo')">Ё</div>
+    <div class="card" onclick="playSound('zh')">Ж</div>
+    <div class="card" onclick="playSound('z')">З</div>
+    <div class="card" onclick="playSound('i')">И</div>
+    <div class="card" onclick="playSound('j')">Й</div>
+    <div class="card" onclick="playSound('k')">К</div>
+    <div class="card" onclick="playSound('l')">Л</div>
+    <div class="card" onclick="playSound('m')">М</div>
+    <div class="card" onclick="playSound('n')">Н</div>
+    <div class="card" onclick="playSound('o')">О</div>
+    <div class="card" onclick="playSound('p')">П</div>
+    <div class="card" onclick="playSound('r')">Р</div>
+    <div class="card" onclick="playSound('s')">С</div>
+    <div class="card" onclick="playSound('t')">Т</div>
+    <div class="card" onclick="playSound('u')">У</div>
+    <div class="card" onclick="playSound('f')">Ф</div>
+    <div class="card" onclick="playSound('h')">Х</div>
+    <div class="card" onclick="playSound('ts')">Ц</div>
+    <div class="card" onclick="playSound('ch')">Ч</div>
+    <div class="card" onclick="playSound('sh')">Ш</div>
+    <div class="card" onclick="playSound('shch')">Щ</div>
+    <div class="card" onclick="playSound('y')">Ы</div>
+    <div class="card" onclick="playSound('e')">Э</div>
+    <div class="card" onclick="playSound('yu')">Ю</div>
+    <div class="card" onclick="playSound('ya')">Я</div>
+  </div>
+</div>
+
+<audio id="player"></audio>
+<script>
+  function playSound(letter) {
+    const audio = document.getElementById("player");
+    audio.src = `audio/${letter}.mp3`;
+    audio.play();
+  }
+</script>
+
+</body>
+</html>

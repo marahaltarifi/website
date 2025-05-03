@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>الحروف التركية - الاستماع</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #e6f9fa;
+    }
+    header {
+      background-color: #007BFF;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav {
+      background-color: #007BFF;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .container {
+      padding: 30px;
+      text-align: center;
+    }
+    h2 {
+      color: #007BFF;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background-color: white;
+      border: 2px solid #007BFF;
+      padding: 20px;
+      border-radius: 10px;
+      color: #007BFF;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .card:hover {
+      background-color: #cce5ff;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>الحروف التركية - استمع وتعلّم</div>
+  <!-- شريط التبويبات داخل الهيدر -->
+  <nav>
+    <a href="#alphabet">الأحرف التركية</a>
+    <a href="#vocabulary">المفردات</a>
+    <a href="#grammar">القواعد</a>
+  </nav>
+</header>
+
+<div class="container" id="alphabet">
+  <h2>انقر على الحرف للاستماع إلى نطقه</h2>
+ 
+  <div class="grid">
+    <div class="card" onclick="playSound('a')">A</div>
+    <div class="card" onclick="playSound('b')">B</div>
+    <div class="card" onclick="playSound('c')">C</div>
+    <div class="card" onclick="playSound('ç')">Ç</div>
+    <div class="card" onclick="playSound('d')">D</div>
+    <div class="card" onclick="playSound('e')">E</div>
+    <div class="card" onclick="playSound('f')">F</div>
+    <div class="card" onclick="playSound('g')">G</div>
+    <div class="card" onclick="playSound('ğ')">Ğ</div>
+    <div class="card" onclick="playSound('h')">H</div>
+    <div class="card" onclick="playSound('ı')">I</div>
+    <div class="card" onclick="playSound('i')">İ</div>
+    <div class="card" onclick="playSound('j')">J</div>
+    <div class="card" onclick="playSound('k')">K</div>
+    <div class="card" onclick="playSound('l')">L</div>
+    <div class="card" onclick="playSound('m')">M</div>
+    <div class="card" onclick="playSound('n')">N</div>
+    <div class="card" onclick="playSound('o')">O</div>
+    <div class="card" onclick="playSound('ö')">Ö</div>
+    <div class="card" onclick="playSound('p')">P</div>
+    <div class="card" onclick="playSound('r')">R</div>
+    <div class="card" onclick="playSound('s')">S</div>
+    <div class="card" onclick="playSound('ş')">Ş</div>
+    <div class="card" onclick="playSound('t')">T</div>
+    <div class="card" onclick="playSound('u')">U</div>
+    <div class="card" onclick="playSound('ü')">Ü</div>
+    <div class="card" onclick="playSound('v')">V</div>
+    <div class="card" onclick="playSound('y')">Y</div>
+    <div class="card" onclick="playSound('z')">Z</div>
+  </div>
+    
+</div>
+
+<audio id="player"></audio>
+<script>
+  function playSound(letter) {
+    const audio = document.getElementById("player");
+    audio.src = `audio/${letter}.mp3`;
+    audio.play();
+  }
+</script>
+
+</body>
+</html>

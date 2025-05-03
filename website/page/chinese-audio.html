@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>الأحرف الصينية - الاستماع</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #e6f9fa;
+    }
+    header {
+      background-color: #007BFF;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    nav {
+      background-color: #007BFF;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .container {
+      padding: 30px;
+      text-align: center;
+    }
+    h2 {
+      color: #007BFF;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background-color: white;
+      border: 2px solid #007BFF;
+      padding: 20px;
+      border-radius: 10px;
+      color: #007BFF;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .card:hover {
+      background-color: #cce5ff;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>الأحرف الصينية - استمع وتعلّم</div>
+  <!-- شريط التبويبات داخل الهيدر -->
+  <nav>
+    <a href="#alphabet">الأحرف الصينية</a>
+    <a href="#vocabulary">المفردات</a>
+    <a href="#grammar">القواعد</a>
+  </nav>
+</header>
+
+<div class="container" id="alphabet">
+  <h2>انقر على الحرف للاستماع إلى نطقه</h2>
+ 
+  <div class="grid">
+    <div class="card" onclick="playSound('a')">啊</div>
+    <div class="card" onclick="playSound('ai')">爱</div>
+    <div class="card" onclick="playSound('an')">安</div>
+    <div class="card" onclick="playSound('ang')">昂</div>
+    <div class="card" onclick="playSound('ao')">凹</div>
+    <div class="card" onclick="playSound('ba')">爸</div>
+    <div class="card" onclick="playSound('bai')">百</div>
+
+    <div class="card" onclick="playSound('ban')">班</div>
+    <div class="card" onclick="playSound('bang')">棒</div>
+    <div class="card" onclick="playSound('bao')">包</div>
+    <div class="card" onclick="playSound('bei')">杯</div>
+    <div class="card" onclick="playSound('ben')">本</div>
+    <div class="card" onclick="playSound('beng')">崩</div>
+    <div class="card" onclick="playSound('bi')">比</div>
+
+    <div class="card" onclick="playSound('bian')">边</div>
+    <div class="card" onclick="playSound('biao')">表</div>
+    <div class="card" onclick="playSound('bie')">别</div>
+    <div class="card" onclick="playSound('bin')">宾</div>
+    <div class="card" onclick="playSound('bing')">病</div>
+    <div class="card" onclick="playSound('bo')">波</div>
+    <div class="card" onclick="playSound('bu')">不</div>
+
+    <div class="card" onclick="playSound('ca')">擦</div>
+    <div class="card" onclick="playSound('cai')">菜</div>
+    <div class="card" onclick="playSound('can')">参</div>
+    <div class="card" onclick="playSound('cang')">藏</div>
+    <div class="card" onclick="playSound('cao')">草</div>
+    <div class="card" onclick="playSound('ce')">册</div>
+    <div class="card" onclick="playSound('ceng')">层</div>
+
+    <div class="card" onclick="playSound('cha')">茶</div>
+    <div class="card" onclick="playSound('chai')">拆</div>
+    <div class="card" onclick="playSound('chan')">产</div>
+    <div class="card" onclick="playSound('chang')">长</div>
+    <div class="card" onclick="playSound('chao')">超</div>
+    <div class="card" onclick="playSound('che')">车</div>
+    <div class="card" onclick="playSound('chen')">陈</div>
+
+    <div class="card" onclick="playSound('cheng')">成</div>
+    <div class="card" onclick="playSound('chi')">吃</div>
+    <div class="card" onclick="playSound('chong')">冲</div>
+    <div class="card" onclick="playSound('chou')">臭</div>
+    <div class="card" onclick="playSound('chu')">出</div>
+    <div class="card" onclick="playSound('chuai')">揣</div>
+    <div class="card" onclick="playSound('chuan')">船</div>
+
+    <div class="card" onclick="playSound('chuang')">床</div>
+    <div class="card" onclick="playSound('chui')">吹</div>
+    <div class="card" onclick="playSound('chun')">春</div>
+    <div class="card" onclick="playSound('chuo')">戳</div>
+    <div class="card" onclick="playSound('ci')">词</div>
+    <div class="card" onclick="playSound('cong')">从</div>
+    <div class="card" onclick="playSound('cou')">凑</div>
+
+    <div class="card" onclick="playSound('cu')">粗</div>
+    <div class="card" onclick="playSound('cuan')">窜</div>
+    <div class="card" onclick="playSound('cui')">催</div>
+    <div class="card" onclick="playSound('cun')">村</div>
+  </div>
+    
+  </div>
+</div>
+
+<audio id="player"></audio>
+<script>
+  function playSound(hanzi) {
+    const audio = document.getElementById("player");
+    audio.src = `audio/${hanzi}.mp3`;
+    audio.play();
+  }
+</script>
+
+</body>
+</html>
