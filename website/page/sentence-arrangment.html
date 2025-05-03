@@ -1,153 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <link rel="shortcut icon" type="image/x-icon" href="C:\website\website\image\logo.png">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لعبة ترتيب الجمل</title>
-  <style>
-    body {
-      background-color: #f0f8ff;
-      color: #007BFF;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    .navbar {
-      background-color: #007BFF;
-      padding: 10px 0;
-    }
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .navbar a:hover {
-      text-decoration: underline;
-    }
-
-    .content {
-      padding: 20px;
-    }
-
-    .sentence-section {
-      display: none;
-      margin-top: 20px;
-    }
-    .word {
-      display: inline-block;
-      background-color: #ffffff;
-      border: 2px solid #007BFF;
-      padding: 10px;
-      margin: 5px;
-      cursor: pointer;
-    }
-    button {
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin-top: 20px;
-      cursor: pointer;
-    }
-    #result {
-      margin-top: 15px;
-      font-weight: bold;
-      font-size: 18px;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="navbar">
-    <a href="index.html">الرئيسية</a>
-    <a href="word-match.html">مطابقة الكلمات</a>
-    <a href="vocabulary-quiz.html">إختبار المفردات</a>
-  </div>
-
-  <div class="content">
-    <h1>📚 لعبة ترتيب الجمل</h1>
-    <label for="language">اختر اللغة:</label>
-    <select id="language">
-      <option value="en">الإنجليزية</option>
-      <option value="fr">الفرنسية</option>
-      <option value="es">الإسبانية</option>
-      <option value="zh">الصينية</option>
-      <option value="ru">الروسية</option>
-      <option value="tr">التركية</option>
-    </select>
-    <button onclick="startSentenceGame()">ابدأ</button>
-
-    <div class="sentence-section" id="game">
-      <h2>رتب الكلمات لتكوين جملة صحيحة</h2>
-      <div id="words"></div>
-      <div id="result"></div>
-      <button onclick="checkSentence()">تحقق</button>
-      <button onclick="nextSentence()">جملة أخرى</button>
-    </div>
-  </div>
-
-  <script>
-    const sentenceSets = {
-      en: ["I love learning languages", "The cat is on the table", "She reads a book every day"],
-      fr: ["J'aime apprendre les langues", "Le chat est sur la table", "Elle lit un livre chaque jour"],
-      es: ["Me gusta aprender idiomas", "El gato está sobre la mesa", "Ella lee un libro cada día"],
-      zh: ["我 喜欢 学习 语言", "猫 在 桌子 上", "她 每天 读 一本 书"],
-      ru: ["Я люблю учить языки", "Кошка на столе", "Она читает книгу каждый день"],
-      tr: ["Ben dilleri öğrenmeyi seviyorum", "Kedi masanın üstünde", "O her gün kitap okur"]
-    };
-
-    let currentLang = 'en';
-    let currentSentence = '';
-    let selectedWords = [];
-
-    function startSentenceGame() {
-      currentLang = document.getElementById('language').value;
-      document.getElementById('game').style.display = 'block';
-      nextSentence();
-    }
-
-    function nextSentence() {
-      const sentences = sentenceSets[currentLang];
-      currentSentence = sentences[Math.floor(Math.random() * sentences.length)];
-      const words = currentSentence.split(' ');
-      const shuffled = words.slice().sort(() => 0.5 - Math.random());
-      selectedWords = [];
-
-      const container = document.getElementById('words');
-      container.innerHTML = '';
-      document.getElementById('result').innerText = '';
-
-      shuffled.forEach(word => {
-        const span = document.createElement('span');
-        span.className = 'word';
-        span.innerText = word;
-        span.onclick = () => selectWord(span, word);
-        container.appendChild(span);
-      });
-    }
-
-    function selectWord(span, word) {
-      if (span.style.visibility === 'hidden') return;
-      selectedWords.push(word);
-      span.style.visibility = 'hidden';
-    }
-
-    function checkSentence() {
-      const userSentence = selectedWords.join(' ');
-      const result = document.getElementById('result');
-      if (userSentence === currentSentence) {
-        result.innerText = '✅ صحيح!';
-        result.style.color = 'green';
-      } else {
-        result.innerText = '❌ حاول مرة أخرى';
-        result.style.color = 'red';
+  <head>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="C:\website\website\image\logo.png"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لعبة ترتيب الجمل</title>
+    <style>
+      body {
+        background-color: #f0f8ff;
+        color: #007bff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
       }
-    }
-  </script>
-</body>
+
+      .navbar {
+        background-color: #007bff;
+        padding: 10px 0;
+      }
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .navbar a:hover {
+        text-decoration: underline;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .sentence-section {
+        display: none;
+        margin-top: 20px;
+      }
+      .word {
+        display: inline-block;
+        background-color: #ffffff;
+        border: 2px solid #007bff;
+        padding: 10px;
+        margin: 5px;
+        cursor: pointer;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      #result {
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="../index.html">الرئيسية</a>
+      <a href="word-match.html">مطابقة الكلمات</a>
+      <a href="vocabulary-quiz.html">إختبار المفردات</a>
+    </div>
+
+    <div class="content">
+      <h1>📚 لعبة ترتيب الجمل</h1>
+      <label for="language">اختر اللغة:</label>
+      <select id="language">
+        <option value="en">الإنجليزية</option>
+        <option value="fr">الفرنسية</option>
+        <option value="es">الإسبانية</option>
+        <option value="zh">الصينية</option>
+        <option value="ru">الروسية</option>
+        <option value="tr">التركية</option>
+      </select>
+      <button onclick="startSentenceGame()">ابدأ</button>
+
+      <div class="sentence-section" id="game">
+        <h2>رتب الكلمات لتكوين جملة صحيحة</h2>
+        <div id="words"></div>
+        <div id="result"></div>
+        <button onclick="checkSentence()">تحقق</button>
+        <button onclick="nextSentence()">جملة أخرى</button>
+      </div>
+    </div>
+
+    <script>
+      const sentenceSets = {
+        en: [
+          "I love learning languages",
+          "The cat is on the table",
+          "She reads a book every day",
+        ],
+        fr: [
+          "J'aime apprendre les langues",
+          "Le chat est sur la table",
+          "Elle lit un livre chaque jour",
+        ],
+        es: [
+          "Me gusta aprender idiomas",
+          "El gato está sobre la mesa",
+          "Ella lee un libro cada día",
+        ],
+        zh: ["我 喜欢 学习 语言", "猫 在 桌子 上", "她 每天 读 一本 书"],
+        ru: [
+          "Я люблю учить языки",
+          "Кошка на столе",
+          "Она читает книгу каждый день",
+        ],
+        tr: [
+          "Ben dilleri öğrenmeyi seviyorum",
+          "Kedi masanın üstünde",
+          "O her gün kitap okur",
+        ],
+      };
+
+      let currentLang = "en";
+      let currentSentence = "";
+      let selectedWords = [];
+
+      function startSentenceGame() {
+        currentLang = document.getElementById("language").value;
+        document.getElementById("game").style.display = "block";
+        nextSentence();
+      }
+
+      function nextSentence() {
+        const sentences = sentenceSets[currentLang];
+        currentSentence =
+          sentences[Math.floor(Math.random() * sentences.length)];
+        const words = currentSentence.split(" ");
+        const shuffled = words.slice().sort(() => 0.5 - Math.random());
+        selectedWords = [];
+
+        const container = document.getElementById("words");
+        container.innerHTML = "";
+        document.getElementById("result").innerText = "";
+
+        shuffled.forEach((word) => {
+          const span = document.createElement("span");
+          span.className = "word";
+          span.innerText = word;
+          span.onclick = () => selectWord(span, word);
+          container.appendChild(span);
+        });
+      }
+
+      function selectWord(span, word) {
+        if (span.style.visibility === "hidden") return;
+        selectedWords.push(word);
+        span.style.visibility = "hidden";
+      }
+
+      function checkSentence() {
+        const userSentence = selectedWords.join(" ");
+        const result = document.getElementById("result");
+        if (userSentence === currentSentence) {
+          result.innerText = "✅ صحيح!";
+          result.style.color = "green";
+        } else {
+          result.innerText = "❌ حاول مرة أخرى";
+          result.style.color = "red";
+        }
+      }
+    </script>
+  </body>
 </html>

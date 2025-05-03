@@ -1,183 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <link rel="shortcut icon" type="image/x-icon" href="C:\website\website\image\logo.png">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لعبة اختبار المفردات</title>
-  <style>
-    body {
-      background-color: #f0f8ff;
-      color: #007BFF;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    /* شريط الأدوات */
-    .navbar {
-      background-color: #007BFF;
-      padding: 10px 0;
-    }
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .navbar a:hover {
-      text-decoration: underline;
-    }
-
-    .content {
-      padding: 20px;
-    }
-
-    .quiz-section {
-      display: none;
-    }
-    button {
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      margin-top: 20px;
-      cursor: pointer;
-    }
-    .option {
-      background-color: #ffffff;
-      border: 2px solid #007BFF;
-      margin: 10px auto;
-      padding: 10px;
-      width: 200px;
-      cursor: pointer;
-    }
-    .option.correct {
-      background-color: #b3ffcc;
-    }
-    .option.incorrect {
-      background-color: #ffcccc;
-    }
-    .message {
-      margin-top: 15px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-    .correct-msg {
-      color: green;
-    }
-    .incorrect-msg {
-      color: red;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="navbar">
-    <a href="index.html">الرئيسية</a>
-    <a href="word-match.html">مطابقة الكلمات</a>
-    <a href="sentence-arrangment.html"> ترتيب الجمل</a>
-  </div>
-
-  <div class="content">
-    <h1>🧠 اختبار المفردات</h1>
-    <label for="language">اختر اللغة:</label>
-    <select id="language">
-      <option value="en">الإنجليزية</option>
-      <option value="fr">الفرنسية</option>
-      <option value="es">الإسبانية</option>
-      <option value="zh">الصينية</option>
-      <option value="ru">الروسية</option>
-      <option value="tr">التركية</option>
-    </select>
-    <button onclick="startQuiz()">ابدأ</button>
-
-    <div class="quiz-section" id="quiz">
-      <h2 id="question">...</h2>
-      <div id="options"></div>
-      <div id="message" class="message"></div>
-      <button onclick="nextQuestion()">السؤال التالي</button>
-    </div>
-  </div>
-
-  <script>
-    const wordSets = {
-      en: [['cat', 'قط'], ['apple', 'تفاحة'], ['car', 'سيارة'], ['house', 'منزل'], ['book', 'كتاب']],
-      fr: [['chat', 'قط'], ['pomme', 'تفاحة'], ['voiture', 'سيارة'], ['maison', 'منزل'], ['livre', 'كتاب']],
-      es: [['gato', 'قط'], ['manzana', 'تفاحة'], ['coche', 'سيارة'], ['casa', 'منزل'], ['libro', 'كتاب']],
-      zh: [['猫', 'قط'], ['苹果', 'تفاحة'], ['车', 'سيارة'], ['房子', 'منزل'], ['书', 'كتاب']],
-      ru: [['кот', 'قط'], ['яблоко', 'تفاحة'], ['машина', 'سيارة'], ['дом', 'منزل'], ['книга', 'كتاب']],
-      tr: [['kedi', 'قط'], ['elma', 'تفاحة'], ['araba', 'سيارة'], ['ev', 'منزل'], ['kitap', 'كتاب']]
-    };
-
-    const messages = {
-      en: { correct: 'Correct!', incorrect: 'Wrong!' },
-      fr: { correct: 'Correct!', incorrect: 'Faux!' },
-      es: { correct: '¡Correcto!', incorrect: '¡Incorrecto!' },
-      zh: { correct: '正确!', incorrect: '错误!' },
-      ru: { correct: 'Правильно!', incorrect: 'Неправильно!' },
-      tr: { correct: 'Doğru!', incorrect: 'Yanlış!' }
-    };
-
-    let currentLang = 'en';
-    let currentWordIndex = 0;
-    let questions = [];
-
-    function startQuiz() {
-      currentLang = document.getElementById('language').value;
-      questions = [...wordSets[currentLang]].sort(() => 0.5 - Math.random());
-      currentWordIndex = 0;
-      document.getElementById('quiz').style.display = 'block';
-      document.getElementById('message').innerText = '';
-      showQuestion();
-    }
-
-    function showQuestion() {
-      const [word, correctAnswer] = questions[currentWordIndex];
-      document.getElementById('question').innerText = `ما معنى: ${word}؟`;
-
-      let options = [correctAnswer];
-      while (options.length < 3) {
-        const wrong = wordSets[currentLang][Math.floor(Math.random() * wordSets[currentLang].length)][1];
-        if (!options.includes(wrong)) options.push(wrong);
+  <head>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="C:\website\website\image\logo.png"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لعبة اختبار المفردات</title>
+    <style>
+      body {
+        background-color: #f0f8ff;
+        color: #007bff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-align: center;
       }
 
-      options = options.sort(() => 0.5 - Math.random());
-      const container = document.getElementById('options');
-      container.innerHTML = '';
-      document.getElementById('message').innerText = '';
+      /* شريط الأدوات */
+      .navbar {
+        background-color: #007bff;
+        padding: 10px 0;
+      }
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .navbar a:hover {
+        text-decoration: underline;
+      }
 
-      options.forEach(option => {
-        const div = document.createElement('div');
-        div.className = 'option';
-        div.innerText = option;
-        div.onclick = () => checkAnswer(div, option === correctAnswer);
-        container.appendChild(div);
-      });
-    }
+      .content {
+        padding: 20px;
+      }
 
-    function checkAnswer(element, isCorrect) {
-      const options = document.querySelectorAll('.option');
-      options.forEach(opt => opt.onclick = null);
+      .quiz-section {
+        display: none;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      .option {
+        background-color: #ffffff;
+        border: 2px solid #007bff;
+        margin: 10px auto;
+        padding: 10px;
+        width: 200px;
+        cursor: pointer;
+      }
+      .option.correct {
+        background-color: #b3ffcc;
+      }
+      .option.incorrect {
+        background-color: #ffcccc;
+      }
+      .message {
+        margin-top: 15px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .correct-msg {
+        color: green;
+      }
+      .incorrect-msg {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="../index.html">الرئيسية</a>
+      <a href="word-match.html">مطابقة الكلمات</a>
+      <a href="sentence-arrangment.html"> ترتيب الجمل</a>
+    </div>
 
-      element.classList.add(isCorrect ? 'correct' : 'incorrect');
+    <div class="content">
+      <h1>🧠 اختبار المفردات</h1>
+      <label for="language">اختر اللغة:</label>
+      <select id="language">
+        <option value="en">الإنجليزية</option>
+        <option value="fr">الفرنسية</option>
+        <option value="es">الإسبانية</option>
+        <option value="zh">الصينية</option>
+        <option value="ru">الروسية</option>
+        <option value="tr">التركية</option>
+      </select>
+      <button onclick="startQuiz()">ابدأ</button>
 
-      const msg = document.getElementById('message');
-      msg.innerText = isCorrect ? messages[currentLang].correct : messages[currentLang].incorrect;
-      msg.className = 'message ' + (isCorrect ? 'correct-msg' : 'incorrect-msg');
-    }
+      <div class="quiz-section" id="quiz">
+        <h2 id="question">...</h2>
+        <div id="options"></div>
+        <div id="message" class="message"></div>
+        <button onclick="nextQuestion()">السؤال التالي</button>
+      </div>
+    </div>
 
-    function nextQuestion() {
-      currentWordIndex++;
-      if (currentWordIndex >= questions.length) {
-        alert('انتهى الاختبار!');
-        document.getElementById('quiz').style.display = 'none';
-      } else {
+    <script>
+      const wordSets = {
+        en: [
+          ["cat", "قط"],
+          ["apple", "تفاحة"],
+          ["car", "سيارة"],
+          ["house", "منزل"],
+          ["book", "كتاب"],
+        ],
+        fr: [
+          ["chat", "قط"],
+          ["pomme", "تفاحة"],
+          ["voiture", "سيارة"],
+          ["maison", "منزل"],
+          ["livre", "كتاب"],
+        ],
+        es: [
+          ["gato", "قط"],
+          ["manzana", "تفاحة"],
+          ["coche", "سيارة"],
+          ["casa", "منزل"],
+          ["libro", "كتاب"],
+        ],
+        zh: [
+          ["猫", "قط"],
+          ["苹果", "تفاحة"],
+          ["车", "سيارة"],
+          ["房子", "منزل"],
+          ["书", "كتاب"],
+        ],
+        ru: [
+          ["кот", "قط"],
+          ["яблоко", "تفاحة"],
+          ["машина", "سيارة"],
+          ["дом", "منزل"],
+          ["книга", "كتاب"],
+        ],
+        tr: [
+          ["kedi", "قط"],
+          ["elma", "تفاحة"],
+          ["araba", "سيارة"],
+          ["ev", "منزل"],
+          ["kitap", "كتاب"],
+        ],
+      };
+
+      const messages = {
+        en: { correct: "Correct!", incorrect: "Wrong!" },
+        fr: { correct: "Correct!", incorrect: "Faux!" },
+        es: { correct: "¡Correcto!", incorrect: "¡Incorrecto!" },
+        zh: { correct: "正确!", incorrect: "错误!" },
+        ru: { correct: "Правильно!", incorrect: "Неправильно!" },
+        tr: { correct: "Doğru!", incorrect: "Yanlış!" },
+      };
+
+      let currentLang = "en";
+      let currentWordIndex = 0;
+      let questions = [];
+
+      function startQuiz() {
+        currentLang = document.getElementById("language").value;
+        questions = [...wordSets[currentLang]].sort(() => 0.5 - Math.random());
+        currentWordIndex = 0;
+        document.getElementById("quiz").style.display = "block";
+        document.getElementById("message").innerText = "";
         showQuestion();
       }
-    }
-  </script>
-</body>
+
+      function showQuestion() {
+        const [word, correctAnswer] = questions[currentWordIndex];
+        document.getElementById("question").innerText = `ما معنى: ${word}؟`;
+
+        let options = [correctAnswer];
+        while (options.length < 3) {
+          const wrong =
+            wordSets[currentLang][
+              Math.floor(Math.random() * wordSets[currentLang].length)
+            ][1];
+          if (!options.includes(wrong)) options.push(wrong);
+        }
+
+        options = options.sort(() => 0.5 - Math.random());
+        const container = document.getElementById("options");
+        container.innerHTML = "";
+        document.getElementById("message").innerText = "";
+
+        options.forEach((option) => {
+          const div = document.createElement("div");
+          div.className = "option";
+          div.innerText = option;
+          div.onclick = () => checkAnswer(div, option === correctAnswer);
+          container.appendChild(div);
+        });
+      }
+
+      function checkAnswer(element, isCorrect) {
+        const options = document.querySelectorAll(".option");
+        options.forEach((opt) => (opt.onclick = null));
+
+        element.classList.add(isCorrect ? "correct" : "incorrect");
+
+        const msg = document.getElementById("message");
+        msg.innerText = isCorrect
+          ? messages[currentLang].correct
+          : messages[currentLang].incorrect;
+        msg.className =
+          "message " + (isCorrect ? "correct-msg" : "incorrect-msg");
+      }
+
+      function nextQuestion() {
+        currentWordIndex++;
+        if (currentWordIndex >= questions.length) {
+          alert("انتهى الاختبار!");
+          document.getElementById("quiz").style.display = "none";
+        } else {
+          showQuestion();
+        }
+      }
+    </script>
+  </body>
 </html>

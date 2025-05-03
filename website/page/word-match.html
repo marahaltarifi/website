@@ -1,198 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <link rel="shortcut icon" type="image/x-icon" href="C:\website\website\image\logo.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لعبة تعليمية - مطابقة الكلمات</title>
-  <style>
-    body {
-      background-color: #f0f8ff;
-      color: #007BFF;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* الشريط العلوي */
-    .navbar {
-      background-color: #007BFF;
-      padding: 10px 0;
-      text-align: center;
-    }
-    .navbar a {
-      color: white;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .navbar a:hover {
-      text-decoration: underline;
-    }
-
-    .content {
-      padding: 20px;
-      text-align: center;
-    }
-
-    .language-select {
-      margin-bottom: 20px;
-    }
-    .game-section {
-      display: none;
-      margin-top: 20px;
-    }
-    .card {
-      background-color: #ffffff;
-      border: 2px solid #007BFF;
-      padding: 10px;
-      display: inline-block;
-      margin: 10px;
-      cursor: pointer;
-      min-width: 80px;
-    }
-    .card.matched {
-      background-color: #b3d9ff;
-      pointer-events: none;
-    }
-    button {
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    .message {
-      margin-top: 15px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-    .correct {
-      color: green;
-    }
-    .incorrect {
-      color: red;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="navbar">
-    <a href="index.html">الرئيسية</a>
-    <a href="vocabulary-quiz.html">إختبار المفردات</a>
-    <a href="sentence-arrangment.html"> ترتيب الجمل</a>
-  </div>
-
-  <div class="content">
-    <h1>🌍 لعبة مطابقة الكلمات</h1>
-    <div class="language-select">
-      <label for="language">اختر اللغة:</label>
-      <select id="language">
-        <option value="en">الإنجليزية</option>
-        <option value="fr">الفرنسية</option>
-        <option value="es">الإسبانية</option>
-        <option value="zh">الصينية</option>
-        <option value="ru">الروسية</option>
-        <option value="tr">التركية</option>
-      </select>
-      <button onclick="startGame()">ابدأ</button>
-    </div>
-
-    <div class="game-section" id="game">
-      <h2>طابق الكلمات</h2>
-      <div id="cards-container"></div>
-      <div id="message" class="message"></div>
-      <button onclick="resetGame()">إعادة اللعبة</button>
-    </div>
-  </div>
-
-  <script>
-    const wordSets = {
-      en: [['cat', 'قط'], ['apple', 'تفاحة'], ['car', 'سيارة'], ['book', 'كتاب'], ['house', 'منزل']],
-      fr: [['chat', 'قط'], ['pomme', 'تفاحة'], ['voiture', 'سيارة'], ['livre', 'كتاب'], ['maison', 'منزل']],
-      es: [['gato', 'قط'], ['manzana', 'تفاحة'], ['coche', 'سيارة'], ['libro', 'كتاب'], ['casa', 'منزل']],
-      zh: [['猫', 'قط'], ['苹果', 'تفاحة'], ['车', 'سيارة'], ['书', 'كتاب'], ['房子', 'منزل']],
-      ru: [['кот', 'قط'], ['яблоко', 'تفاحة'], ['машина', 'سيارة'], ['книга', 'كتاب'], ['дом', 'منزل']],
-      tr: [['kedi', 'قط'], ['elma', 'تفاحة'], ['araba', 'سيارة'], ['kitap', 'كتاب'], ['ev', 'منزل']]
-    };
-
-    const messages = {
-      en: { correct: 'Correct!', incorrect: 'Wrong!' },
-      fr: { correct: 'Correct!', incorrect: 'Faux!' },
-      es: { correct: '¡Correcto!', incorrect: '¡Incorrecto!' },
-      zh: { correct: '正确!', incorrect: '错误!' },
-      ru: { correct: 'Правильно!', incorrect: 'Неправильно!' },
-      tr: { correct: 'Doğru!', incorrect: 'Yanlış!' }
-    };
-
-    let selectedLang = 'en';
-    let cards = [];
-    let firstCard = null;
-
-    function startGame() {
-      selectedLang = document.getElementById('language').value;
-      document.getElementById('game').style.display = 'block';
-      document.getElementById('message').innerText = '';
-      generateCards();
-    }
-
-    function generateCards() {
-      const container = document.getElementById('cards-container');
-      container.innerHTML = '';
-      document.getElementById('message').innerText = '';
-      cards = [];
-      const words = wordSets[selectedLang];
-      let pairs = [];
-      words.forEach(([foreign, arabic]) => {
-        pairs.push({ text: foreign, pair: arabic });
-        pairs.push({ text: arabic, pair: foreign });
-      });
-
-      pairs = pairs.sort(() => 0.5 - Math.random());
-
-      pairs.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerText = item.text;
-        card.dataset.pair = item.pair;
-        card.onclick = () => selectCard(card);
-        container.appendChild(card);
-      });
-    }
-
-    function selectCard(card) {
-      if (card.classList.contains('matched') || card === firstCard) return;
-
-      card.style.backgroundColor = '#cce6ff';
-
-      if (!firstCard) {
-        firstCard = card;
-      } else {
-        const messageEl = document.getElementById('message');
-        if (card.dataset.pair === firstCard.innerText || firstCard.dataset.pair === card.innerText) {
-          card.classList.add('matched');
-          firstCard.classList.add('matched');
-          messageEl.innerText = messages[selectedLang].correct;
-          messageEl.className = 'message correct';
-        } else {
-          const tempFirst = firstCard;
-          messageEl.innerText = messages[selectedLang].incorrect;
-          messageEl.className = 'message incorrect';
-          setTimeout(() => {
-            card.style.backgroundColor = '#fff';
-            tempFirst.style.backgroundColor = '#fff';
-            messageEl.innerText = '';
-          }, 1000);
-        }
-        firstCard = null;
+  <head>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="C:\website\website\image\logo.png"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لعبة تعليمية - مطابقة الكلمات</title>
+    <style>
+      body {
+        background-color: #f0f8ff;
+        color: #007bff;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
       }
-    }
 
-    function resetGame() {
-      generateCards();
-    }
-  </script>
-</body>
+      /* الشريط العلوي */
+      .navbar {
+        background-color: #007bff;
+        padding: 10px 0;
+        text-align: center;
+      }
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px;
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .navbar a:hover {
+        text-decoration: underline;
+      }
+
+      .content {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .language-select {
+        margin-bottom: 20px;
+      }
+      .game-section {
+        display: none;
+        margin-top: 20px;
+      }
+      .card {
+        background-color: #ffffff;
+        border: 2px solid #007bff;
+        padding: 10px;
+        display: inline-block;
+        margin: 10px;
+        cursor: pointer;
+        min-width: 80px;
+      }
+      .card.matched {
+        background-color: #b3d9ff;
+        pointer-events: none;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      .message {
+        margin-top: 15px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .correct {
+        color: green;
+      }
+      .incorrect {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="../index.html">الرئيسية</a>
+      <a href="vocabulary-quiz.html">إختبار المفردات</a>
+      <a href="sentence-arrangment.html"> ترتيب الجمل</a>
+    </div>
+
+    <div class="content">
+      <h1>🌍 لعبة مطابقة الكلمات</h1>
+      <div class="language-select">
+        <label for="language">اختر اللغة:</label>
+        <select id="language">
+          <option value="en">الإنجليزية</option>
+          <option value="fr">الفرنسية</option>
+          <option value="es">الإسبانية</option>
+          <option value="zh">الصينية</option>
+          <option value="ru">الروسية</option>
+          <option value="tr">التركية</option>
+        </select>
+        <button onclick="startGame()">ابدأ</button>
+      </div>
+
+      <div class="game-section" id="game">
+        <h2>طابق الكلمات</h2>
+        <div id="cards-container"></div>
+        <div id="message" class="message"></div>
+        <button onclick="resetGame()">إعادة اللعبة</button>
+      </div>
+    </div>
+
+    <script>
+      const wordSets = {
+        en: [
+          ["cat", "قط"],
+          ["apple", "تفاحة"],
+          ["car", "سيارة"],
+          ["book", "كتاب"],
+          ["house", "منزل"],
+        ],
+        fr: [
+          ["chat", "قط"],
+          ["pomme", "تفاحة"],
+          ["voiture", "سيارة"],
+          ["livre", "كتاب"],
+          ["maison", "منزل"],
+        ],
+        es: [
+          ["gato", "قط"],
+          ["manzana", "تفاحة"],
+          ["coche", "سيارة"],
+          ["libro", "كتاب"],
+          ["casa", "منزل"],
+        ],
+        zh: [
+          ["猫", "قط"],
+          ["苹果", "تفاحة"],
+          ["车", "سيارة"],
+          ["书", "كتاب"],
+          ["房子", "منزل"],
+        ],
+        ru: [
+          ["кот", "قط"],
+          ["яблоко", "تفاحة"],
+          ["машина", "سيارة"],
+          ["книга", "كتاب"],
+          ["дом", "منزل"],
+        ],
+        tr: [
+          ["kedi", "قط"],
+          ["elma", "تفاحة"],
+          ["araba", "سيارة"],
+          ["kitap", "كتاب"],
+          ["ev", "منزل"],
+        ],
+      };
+
+      const messages = {
+        en: { correct: "Correct!", incorrect: "Wrong!" },
+        fr: { correct: "Correct!", incorrect: "Faux!" },
+        es: { correct: "¡Correcto!", incorrect: "¡Incorrecto!" },
+        zh: { correct: "正确!", incorrect: "错误!" },
+        ru: { correct: "Правильно!", incorrect: "Неправильно!" },
+        tr: { correct: "Doğru!", incorrect: "Yanlış!" },
+      };
+
+      let selectedLang = "en";
+      let cards = [];
+      let firstCard = null;
+
+      function startGame() {
+        selectedLang = document.getElementById("language").value;
+        document.getElementById("game").style.display = "block";
+        document.getElementById("message").innerText = "";
+        generateCards();
+      }
+
+      function generateCards() {
+        const container = document.getElementById("cards-container");
+        container.innerHTML = "";
+        document.getElementById("message").innerText = "";
+        cards = [];
+        const words = wordSets[selectedLang];
+        let pairs = [];
+        words.forEach(([foreign, arabic]) => {
+          pairs.push({ text: foreign, pair: arabic });
+          pairs.push({ text: arabic, pair: foreign });
+        });
+
+        pairs = pairs.sort(() => 0.5 - Math.random());
+
+        pairs.forEach((item) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerText = item.text;
+          card.dataset.pair = item.pair;
+          card.onclick = () => selectCard(card);
+          container.appendChild(card);
+        });
+      }
+
+      function selectCard(card) {
+        if (card.classList.contains("matched") || card === firstCard) return;
+
+        card.style.backgroundColor = "#cce6ff";
+
+        if (!firstCard) {
+          firstCard = card;
+        } else {
+          const messageEl = document.getElementById("message");
+          if (
+            card.dataset.pair === firstCard.innerText ||
+            firstCard.dataset.pair === card.innerText
+          ) {
+            card.classList.add("matched");
+            firstCard.classList.add("matched");
+            messageEl.innerText = messages[selectedLang].correct;
+            messageEl.className = "message correct";
+          } else {
+            const tempFirst = firstCard;
+            messageEl.innerText = messages[selectedLang].incorrect;
+            messageEl.className = "message incorrect";
+            setTimeout(() => {
+              card.style.backgroundColor = "#fff";
+              tempFirst.style.backgroundColor = "#fff";
+              messageEl.innerText = "";
+            }, 1000);
+          }
+          firstCard = null;
+        }
+      }
+
+      function resetGame() {
+        generateCards();
+      }
+    </script>
+  </body>
 </html>

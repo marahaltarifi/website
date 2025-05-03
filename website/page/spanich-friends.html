@@ -1,66 +1,196 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>👥 التواصل مع أصدقاء من دول أخرى</title>
-  <style>
-    body { font-family: sans-serif; margin: 0; background: #e6f9fa; }
-    header { background-color: #007BFF; color: white; text-align: center; padding: 20px; font-size: 24px; font-weight: bold; }
-    nav { background-color: #007BFF; padding: 10px; display: flex; justify-content: center; gap: 20px; }
-    nav a { color: white; font-weight: bold; text-decoration: none; }
-    .container { padding: 30px; text-align: center; }
-    h2 { color: #007BFF; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1000px; margin: auto; }
-    .card { background-color: #b3d7ff; padding: 20px; border-radius: 10px; color: #007BFF; font-weight: bold; }
-    .card p { margin: 5px 0 0; font-weight: normal; }
-  </style>
-</head>
-<body>
-  <header>👥 التواصل مع أصدقاء من دول أخرى</header>
-  <nav>
-    <a href="index.html">Página Principal</a>
-    <a href="travel.html">Viajes</a>
-    <a href="career.html">Carrera</a>
-    <a href="study.html">Estudio</a>
-    <a href="culture.html">Cultura</a>
-    <a href="friends.html">Amistad</a>
-    <a href="brain.html">Memoria</a>
-  </nav>
-  <div class="container">
-    <h2>Vocabulario</h2>
-    <div class="grid">
-      <div class="card">amigo<br><p>صديق</p></div>
-      <div class="card">amistad<br><p>صداقة</p></div>
-      <div class="card">charla<br><p>دردشة</p></div>
-      <div class="card">comunicación<br><p>تواصل</p></div>
-      <div class="card">mensaje<br><p>رسالة</p></div>
-      <div class="card">saludo<br><p>تحية</p></div>
-      <div class="card">presentarse<br><p>يقدم نفسه</p></div>
-      <div class="card">compartir<br><p>يشارك</p></div>
-      <div class="card">conversación<br><p>محادثة</p></div>
-      <div class="card">broma<br><p>مزحة</p></div>
-      <div class="card">grupo<br><p>مجموعة</p></div>
-      <div class="card">relación<br><p>علاقة</p></div>
-      <div class="card">comprensión<br><p>تفهم</p></div>
-      <div class="card">apoyo<br><p>دعم</p></div>
-      <div class="card">escuchar<br><p>يستمع</p></div>
-      <div class="card">ayudar<br><p>يساعد</p></div>
-      <div class="card">internacional<br><p>دولي</p></div>
-      <div class="card">país<br><p>بلد</p></div>
-      <div class="card">extranjero<br><p>أجنبي</p></div>
-      <div class="card">experiencia<br><p>تجربة</p></div>
-      <div class="card">red social<br><p>شبكة اجتماعية</p></div>
-      <div class="card">videollamada<br><p>مكالمة فيديو</p></div>
-      <div class="card">correo electrónico<br><p>بريد إلكتروني</p></div>
-      <div class="card">saludo<br><p>تحية</p></div>
-      <div class="card">idioma<br><p>لغة</p></div>
-      <div class="card">compañero<br><p>رفيق</p></div>
-      <div class="card">diálogo<br><p>حوار</p></div>
-      <div class="card">intercambio<br><p>تبادل</p></div>
-      <div class="card">amistad duradera<br><p>صداقة دائمة</p></div>
-      <div class="card">conexión<br><p>اتصال</p></div>
-
+  <head>
+    <meta charset="UTF-8" />
+    <title>👥 التواصل مع أصدقاء من دول أخرى</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        background: #e6f9fa;
+      }
+      header {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      nav {
+        background-color: #007bff;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      nav a {
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .container {
+        padding: 30px;
+        text-align: center;
+      }
+      h2 {
+        color: #007bff;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        max-width: 1000px;
+        margin: auto;
+      }
+      .card {
+        background-color: #b3d7ff;
+        padding: 20px;
+        border-radius: 10px;
+        color: #007bff;
+        font-weight: bold;
+      }
+      .card p {
+        margin: 5px 0 0;
+        font-weight: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <header>👥 التواصل مع أصدقاء من دول أخرى</header>
+    <nav>
+      <a href="../index.html">Página Principal</a>
+      <a href="travel.html">Viajes</a>
+      <a href="career.html">Carrera</a>
+      <a href="study.html">Estudio</a>
+      <a href="culture.html">Cultura</a>
+      <a href="friends.html">Amistad</a>
+      <a href="brain.html">Memoria</a>
+    </nav>
+    <div class="container">
+      <h2>Vocabulario</h2>
+      <div class="grid">
+        <div class="card">
+          amigo<br />
+          <p>صديق</p>
+        </div>
+        <div class="card">
+          amistad<br />
+          <p>صداقة</p>
+        </div>
+        <div class="card">
+          charla<br />
+          <p>دردشة</p>
+        </div>
+        <div class="card">
+          comunicación<br />
+          <p>تواصل</p>
+        </div>
+        <div class="card">
+          mensaje<br />
+          <p>رسالة</p>
+        </div>
+        <div class="card">
+          saludo<br />
+          <p>تحية</p>
+        </div>
+        <div class="card">
+          presentarse<br />
+          <p>يقدم نفسه</p>
+        </div>
+        <div class="card">
+          compartir<br />
+          <p>يشارك</p>
+        </div>
+        <div class="card">
+          conversación<br />
+          <p>محادثة</p>
+        </div>
+        <div class="card">
+          broma<br />
+          <p>مزحة</p>
+        </div>
+        <div class="card">
+          grupo<br />
+          <p>مجموعة</p>
+        </div>
+        <div class="card">
+          relación<br />
+          <p>علاقة</p>
+        </div>
+        <div class="card">
+          comprensión<br />
+          <p>تفهم</p>
+        </div>
+        <div class="card">
+          apoyo<br />
+          <p>دعم</p>
+        </div>
+        <div class="card">
+          escuchar<br />
+          <p>يستمع</p>
+        </div>
+        <div class="card">
+          ayudar<br />
+          <p>يساعد</p>
+        </div>
+        <div class="card">
+          internacional<br />
+          <p>دولي</p>
+        </div>
+        <div class="card">
+          país<br />
+          <p>بلد</p>
+        </div>
+        <div class="card">
+          extranjero<br />
+          <p>أجنبي</p>
+        </div>
+        <div class="card">
+          experiencia<br />
+          <p>تجربة</p>
+        </div>
+        <div class="card">
+          red social<br />
+          <p>شبكة اجتماعية</p>
+        </div>
+        <div class="card">
+          videollamada<br />
+          <p>مكالمة فيديو</p>
+        </div>
+        <div class="card">
+          correo electrónico<br />
+          <p>بريد إلكتروني</p>
+        </div>
+        <div class="card">
+          saludo<br />
+          <p>تحية</p>
+        </div>
+        <div class="card">
+          idioma<br />
+          <p>لغة</p>
+        </div>
+        <div class="card">
+          compañero<br />
+          <p>رفيق</p>
+        </div>
+        <div class="card">
+          diálogo<br />
+          <p>حوار</p>
+        </div>
+        <div class="card">
+          intercambio<br />
+          <p>تبادل</p>
+        </div>
+        <div class="card">
+          amistad duradera<br />
+          <p>صداقة دائمة</p>
+        </div>
+        <div class="card">
+          conexión<br />
+          <p>اتصال</p>
+        </div>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

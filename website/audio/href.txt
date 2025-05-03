@@ -1,4 +1,4 @@
-index     "C:\website\page\index.html"
+index     "C:\website\page\../index.html"
 alphabet English     "C:\website\page\english-alphabet.html"
 vocabulary English     "C:\website\page\english-vocabulary.html"
 grammar English     "C:\website\page\english-grammar.html"
